@@ -11,6 +11,7 @@ jQuery(document).ready(function($) {
       : ((aRankType > bRankType) ? -1 : aRank - bRank)
     );
   };
+  var flagDir = '/wp-content/plugins/wp-egdform/img/flags/';
 
   var table = $('.pdb-list table')[0];
   if (table) {
@@ -28,7 +29,11 @@ jQuery(document).ready(function($) {
     $(table).find('td.participation-field').each(function(i, e) {
       $(e).text(
         $(e).text().trim().split(', ').map(p => pMap[p]).join()
-      )
+      );
+    });
+    $(table).find('td.country-field').each(function(i, e) {
+      var src = flagDir + $(e).text().trim().toLowerCase() + '.png';
+      $(e).html($('<img src="' + src + '" />'));
     });
   }
 });
