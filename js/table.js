@@ -8,7 +8,12 @@ jQuery(document).ready(function($) {
     var bRank = parseInt(b.substr(0, b.length - 1));
     return ((aRankType < bRankType)
       ? 1
-      : ((aRankType > bRankType) ? -1 : aRank - bRank)
+      : (
+        (aRankType > bRankType)
+        ? -1
+        // dan/pro ranks go upwards, kyu ranks go downwards :)
+        : ((aRankType === 'k') ? aRank - bRank : bRank - aRank)
+      )
     );
   };
   var flagDir = '/wp-content/plugins/wp-egdform/img/flags/';
@@ -20,7 +25,7 @@ jQuery(document).ready(function($) {
     $(thead).find('th.grade').click(function () {
       $(table).find('td.grade-field')
         .sort(function(a, b) {
-          return goRankSort(a.textContent, b.textContent);
+          return goRankSort(b.textContent, a.textContent);
         })
         .each(
           function(i, e) { $(tbody).append($(e).parent()); }
