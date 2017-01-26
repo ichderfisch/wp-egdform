@@ -12,16 +12,25 @@
  * Add CSS & JS
  */
 function register_egdform_css_js() {
-  
+
   // Register CSS
-	wp_register_style( 'egdform', plugins_url( 'wp-egdform/css/style.css' ) );
-  
+  wp_register_style( 'egdform', plugins_url( 'wp-egdform/css/style.css' ) );
+
   // Register JS
-  wp_register_script( 'egdform', plugins_url( 'wp-egdform/js/script.js' ) );
-  
+  wp_register_script(
+    'egdform',
+    plugins_url( 'wp-egdform/js/script.js' ),
+    array( 'jquery' )
+  );
+  wp_register_script(
+    'egdtable',
+    plugins_url( 'wp-egdform/js/table.js' ),
+    array( 'jquery' )
+  );
   // Enqueue them all
-	wp_enqueue_style( 'egdform' );
+  wp_enqueue_style( 'egdform' );
   wp_enqueue_script( 'egdform' );
+  wp_enqueue_script( 'egdtable' );
 }
 
 add_action( 'wp_enqueue_scripts', 'register_egdform_css_js' );
