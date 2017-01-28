@@ -50,3 +50,16 @@
     clip: rect(0,0,0,0);
     border: 0;
 }
+
+td.participation-field {
+  display: flex;
+  justify-content: space-around;
+}
+td.participation-field .box {
+  width: 20px;
+  height: 20px;
+  background-color: grey;
+}
+td.participation-field .box.active {
+  background-color: #96c346;
+}

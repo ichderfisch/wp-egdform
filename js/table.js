@@ -33,10 +33,17 @@ jQuery(document).ready(function($) {
           function(i, e) { $(tbody).append($(e).parent()); }
         );
     });
+    var box = '<div class="box" />';
+    var activebox = '<div class="box active" />';
     $(table).find('td.participation-field').each(function(i, e) {
-      $(e).text(
-        $(e).text().trim().split(', ').map(p => pMap[p]).join()
-      );
+      var participation = $.map($(e).text().trim().split(', '), function(e) {
+        return pMap[e];
+      });
+      console.log('p', participation);
+      $(e).empty();
+      $.each([1, 2, 3], function(i, p) {
+        $(e).append($(participation.indexOf(p) >= 0 ? activebox : box));
+      });
     });
     $(table).find('td.country-field').each(function(i, e) {
       var country = $(e).text().trim();

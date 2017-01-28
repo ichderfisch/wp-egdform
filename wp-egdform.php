@@ -14,7 +14,10 @@
 function register_egdform_css_js() {
 
   // Register CSS
-  wp_register_style( 'egdform', plugins_url( 'wp-egdform/css/style.css' ) );
+  wp_register_style(
+    'egdform',
+    plugins_url( 'wp-egdform/css/style.css?v=1' )
+  );
 
   // Register JS
   wp_register_script(
