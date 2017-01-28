@@ -1,9 +1,11 @@
 jQuery(document).ready(function($) {
   var pMap = { 'First week': 1, 'Weekend tournament': 2, 'Second week': 3 };
-  var goRankTypes = { 'k': 0, 'd': 1, 'p': 2 };
+  var goRankTypes = { 'k': 1, 'd': 2, 'p': 3 };
   var goRankSort = function(a, b) {
     var aRankType = goRankTypes[a.substr(a.length -1)];
     var bRankType = goRankTypes[b.substr(b.length -1)];
+    if (!aRankType) return 1;
+    if (!bRankType) return -1;
     var aRank = parseInt(a.substr(0, a.length - 1));
     var bRank = parseInt(b.substr(0, b.length - 1));
     return ((aRankType < bRankType)
@@ -12,7 +14,7 @@ jQuery(document).ready(function($) {
         (aRankType > bRankType)
         ? -1
         // dan/pro ranks go upwards, kyu ranks go downwards :)
-        : ((aRankType === 'k') ? aRank - bRank : bRank - aRank)
+        : ((aRankType === 0) ? aRank - bRank : bRank - aRank)
       )
     );
   };
@@ -25,7 +27,7 @@ jQuery(document).ready(function($) {
     $(thead).find('th.grade').click(function () {
       $(table).find('td.grade-field')
         .sort(function(a, b) {
-          return goRankSort(b.textContent, a.textContent);
+          return goRankSort(a.textContent.trim(), b.textContent.trim());
         })
         .each(
           function(i, e) { $(tbody).append($(e).parent()); }
