@@ -39,8 +39,9 @@ jQuery(document).ready(function($) {
       );
     });
     $(table).find('td.country-field').each(function(i, e) {
-      var src = flagDir + $(e).text().trim().toLowerCase() + '.png';
-      $(e).html($('<img src="' + src + '" />'));
+      var country = $(e).text().trim();
+      var src = flagDir + country.toLowerCase() + '.png';
+      $(e).html($('<img src="' + src + '" alt="' + country + '" />'));
     });
   }
 });
