@@ -14,7 +14,7 @@ jQuery(document).ready(function($) {
         (aRankType > bRankType)
         ? -1
         // dan/pro ranks go upwards, kyu ranks go downwards :)
-        : ((aRankType === 0) ? aRank - bRank : bRank - aRank)
+        : ((aRankType === 1) ? aRank - bRank : bRank - aRank)
       )
     );
   };
