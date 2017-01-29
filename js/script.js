@@ -24,32 +24,45 @@ jQuery(document).ready( function($) {
   }
   if (y) {
     var egdSearchBtn = $(y.find('#egd-find-id')[0]);
+    var egdSearchByIdBtn = $(y.find('#egd-find-player')[0]);
     var url = 'http://www.europeangodatabase.eu/EGD/GetPlayerDataByData.php';
+    var idUrl = 'http://www.europeangodatabase.eu/EGD/GetPlayerDataByPIN.php';
     var list = $('#egd-search-results');
     var egdFName = y.find('#egd-first-name')[0];
     var egdLName = y.find('#egd-last-name')[0];
+    var egdID = y.find('#egd-id')[0];
     var spinner = $(y.find('#edg-spinner')[0]);
+    function showList(result) {
+      list.empty().show();
+      spinner.hide();
+      $.each(result.players, function(i, player) {
+        var text = player.Pin_Player + ', ';
+        text += player.Real_Name + ' ' + player.Real_Last_Name + ', ';
+        text += player.Grade + ', ';
+        text += player.Club + ' ' + player.Country_Code;
+        var li = $('<button class="egd-search-results__player">').text(text);
+        li.appendTo(list);
+        li.click(function() { autoFill(player); list.hide(); });
+      });
+    }
     function search() {
       spinner.show();
       $.getJSON(
         url,
         { name: egdFName.value, lastname: egdLName.value },
-        function(result) {
-          list.empty().show();
-          spinner.hide();
-          $.each(result.players, function(i, player) {
-            var text = player.Pin_Player + ', ';
-            text += player.Real_Name + ' ' + player.Real_Last_Name + ', ';
-            text += player.Grade + ', ';
-            text += player.Club + ' ' + player.Country_Code;
-            var li = $('<button class="egd-search-results__player">').text(text);
-            li.appendTo(list);
-            li.click(function() { autoFill(player); list.hide(); });
-          });
-        }
+        showList
+      );
+    };
+    function searchById() {
+      spinner.show();
+      $.getJSON(
+        idUrl,
+        { pin: egdID.value },
+        function(result) { showList({ players: [result] }); }
       );
     };
     egdSearchBtn.click(search);
+    egdSearchByIdBtn.click(searchById);
   }
 });
 
