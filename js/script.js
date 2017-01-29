@@ -3,43 +3,66 @@ jQuery(document).ready( function($) {
   var y = $('.egd-search');
   if (w) {
     var registerForm = $(w.find('form')[0]);
+    function setField(selector, value, readonly) {
+      var els = registerForm.find(selector);
+      if (els.length) {
+        var el = els[0];
+        el.value = value;
+        if (readonly) $(el).attr('readonly', true);
+      }
+    }
     function autoFill(player) {
-      registerForm.find('#pdb-egd_id')[0].value = player.Pin_Player;
-      registerForm.find('#pdb-first_name')[0].value = player.Name;
-      registerForm.find('#pdb-last_name')[0].value = player.Last_Name;
-      registerForm.find('#pdb-country')[0].value = player.Country_Code;
-      registerForm.find('#pdb-club')[0].value = player.Club;
-      registerForm.find('#pdb-grade')[0].value = player.Grade;
+      setField('#pdb-egd_id', player.Pin_Player);
+      setField('#pdb-first_name', player.Name, true);
+      setField('#pdb-last_name', player.Last_Name, true);
+      setField('#pdb-country', player.Country_Code);
+      setField('#pdb-club', player.Club);
+      setField('#pdb-grade', player.Grade);
+      setField('#pdb-email', '');
+      setField('#pdb-age_group', '');
     }
   }
   if (y) {
     var egdSearchBtn = $(y.find('#egd-find-id')[0]);
+    var egdSearchByIdBtn = $(y.find('#egd-find-player')[0]);
     var url = 'http://www.europeangodatabase.eu/EGD/GetPlayerDataByData.php';
+    var idUrl = 'http://www.europeangodatabase.eu/EGD/GetPlayerDataByPIN.php';
     var list = $('#egd-search-results');
     var egdFName = y.find('#egd-first-name')[0];
     var egdLName = y.find('#egd-last-name')[0];
+    var egdID = y.find('#egd-id')[0];
     var spinner = $(y.find('#edg-spinner')[0]);
+    function showList(result) {
+      list.empty().show();
+      spinner.hide();
+      $.each(result.players, function(i, player) {
+        var text = player.Pin_Player + ', ';
+        text += player.Real_Name + ' ' + player.Real_Last_Name + ', ';
+        text += player.Grade + ', ';
+        text += player.Club + ' ' + player.Country_Code;
+        var li = $('<button class="egd-search-results__player">').text(text);
+        li.appendTo(list);
+        li.click(function() { autoFill(player); list.hide(); });
+      });
+    }
     function search() {
       spinner.show();
       $.getJSON(
         url,
         { name: egdFName.value, lastname: egdLName.value },
-        function(result) {
-          list.empty().show();
-          spinner.hide();
-          $.each(result.players, function(i, player) {
-            var text = player.Pin_Player + ', ';
-            text += player.Real_Name + ' ' + player.Real_Last_Name + ', ';
-            text += player.Grade + ', ';
-            text += player.Club + ' ' + player.Country_Code;
-            var li = $('<button class="egd-search-results__player">').text(text);
-            li.appendTo(list);
-            li.click(function() { autoFill(player); list.hide(); });
-          });
-        }
+        showList
+      );
+    };
+    function searchById() {
+      spinner.show();
+      $.getJSON(
+        idUrl,
+        { pin: egdID.value },
+        function(result) { showList({ players: [result] }); }
       );
     };
     egdSearchBtn.click(search);
+    egdSearchByIdBtn.click(searchById);
   }
 });
 
