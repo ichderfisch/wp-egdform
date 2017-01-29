@@ -3,13 +3,23 @@ jQuery(document).ready( function($) {
   var y = $('.egd-search');
   if (w) {
     var registerForm = $(w.find('form')[0]);
+    function setField(selector, value, readonly) {
+      var els = registerForm.find(selector);
+      if (els.length) {
+        var el = els[0];
+        el.value = value;
+        if (readonly) $(el).attr('readonly', true);
+      }
+    }
     function autoFill(player) {
-      registerForm.find('#pdb-egd_id')[0].value = player.Pin_Player;
-      registerForm.find('#pdb-first_name')[0].value = player.Name;
-      registerForm.find('#pdb-last_name')[0].value = player.Last_Name;
-      registerForm.find('#pdb-country')[0].value = player.Country_Code;
-      registerForm.find('#pdb-club')[0].value = player.Club;
-      registerForm.find('#pdb-grade')[0].value = player.Grade;
+      setField('#pdb-egd_id', player.Pin_Player);
+      setField('#pdb-first_name', player.Name, true);
+      setField('#pdb-last_name', player.Last_Name, true);
+      setField('#pdb-country', player.Country_Code);
+      setField('#pdb-club', player.Club);
+      setField('#pdb-grade', player.Grade);
+      setField('#pdb-email', '');
+      setField('#pdb-age_group', '');
     }
   }
   if (y) {
