@@ -287,7 +287,7 @@ jQuery(document).ready(function($) {
       var participation = $.map($(e).text().trim().split(', '), function(e) {
         return pMap[e];
       });
-      console.log('p', participation);
+      // console.log('p', participation);
       $(e).empty();
       $.each([1, 2, 3], function(i, p) {
         $(e).append($(participation.indexOf(p) >= 0 ? activebox : box));
