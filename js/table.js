@@ -281,8 +281,8 @@ jQuery(document).ready(function($) {
           function(i, e) { $(tbody).append($(e).parent()); }
         );
     });
-    var box = '<div class="box" />';
-    var activebox = '<div class="box active" />';
+    var box = '<div class="participation-field__box" />';
+    var activebox = '<div class="participation-field__box participation-field__box--active" />';
     $(table).find('td.participation-field').each(function(i, e) {
       var participation = $.map($(e).text().trim().split(', '), function(e) {
         return pMap[e];
@@ -293,6 +293,7 @@ jQuery(document).ready(function($) {
         $(e).append($(participation.indexOf(p) >= 0 ? activebox : box));
       });
     });
+    $( ".participation-field" ).wrapInner( '<div class="participation-field__wrapper"></div>');
     $(table).find('td.country-field').each(function(i, e) {
       var country = countryMap[$(e).text().trim()] || '';
       var src = flagDir + country.toLowerCase() + '.png';

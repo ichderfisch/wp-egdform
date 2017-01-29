@@ -51,15 +51,15 @@
     border: 0;
 }
 
-td.participation-field {
+.participation-field__wrapper {
   display: flex;
   justify-content: space-around;
 }
-td.participation-field .box {
+.participation-field__box {
   width: 20px;
   height: 20px;
   background-color: grey;
 }
-td.participation-field .box.active {
+.participation-field__box--active {
   background-color: #96c346;
 }
