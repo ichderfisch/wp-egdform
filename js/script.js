@@ -49,7 +49,7 @@ jQuery(document).ready( function($) {
       spinner.show();
       $.getJSON(
         url,
-        { name: egdFName.value, lastname: egdLName.value },
+        { name: egdFName.value.trim(), lastname: egdLName.value.trim() },
         showList
       );
     };
@@ -57,7 +57,7 @@ jQuery(document).ready( function($) {
       spinner.show();
       $.getJSON(
         idUrl,
-        { pin: egdID.value },
+        { pin: egdID.value.trim() },
         function(result) { showList({ players: [result] }); }
       );
     };
