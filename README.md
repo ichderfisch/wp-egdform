@@ -18,11 +18,12 @@ Create a form with the following input fields on your page and add the `[egd-for
 - [x] search by name (strip spaces in field)
 - [x] clear fields on new search search
 - [x] disable name input fields when using search
-- [ ] check "played in European tournament before" if EGC ID provided
+- [x] check and hide "played in European tournament before" if EGC ID provided
 
 ## List
 - [ ] link to EGD
 - [x] show marks for participation
+- [ ] wrap marks to keep table cell style consistent
 - [x] registration status / payment (only editable in backend): not required, open, done
 - [x] sorting by rank
 - [ ] sort by other fields

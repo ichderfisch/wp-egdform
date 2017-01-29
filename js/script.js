@@ -20,6 +20,12 @@ jQuery(document).ready( function($) {
       setField('#pdb-grade', player.Grade);
       setField('#pdb-email', '');
       setField('#pdb-age_group', '');
+      var playedEgcBefore = $('[name="played_egc_before"][type="checkbox"]');
+      if (playedEgcBefore.length) {
+        var e = $(playedEgcBefore[0]);
+        e.attr('checked', true);
+        $(e.closest('tr')[0]).hide();
+      }
     }
   }
   if (y) {
