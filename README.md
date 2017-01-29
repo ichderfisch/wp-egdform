@@ -23,7 +23,7 @@ Create a form with the following input fields on your page and add the `[egd-for
 ## List
 - [ ] link to EGD
 - [x] show marks for participation
-- [ ] wrap marks to keep table cell style consistent
+- [x] wrap marks to keep table cell style consistent
 - [x] registration status / payment (only editable in backend): not required, open, done
 - [x] sorting by rank
-- [ ] sort by other fields
+- [x] sort by other fields
