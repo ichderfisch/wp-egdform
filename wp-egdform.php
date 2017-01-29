@@ -40,6 +40,10 @@ function register_egdform_css_js() {
     'datatables',
     'https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js'
   );
+  wp_register_script(
+    'datatablesAltstring',
+    'https://cdn.datatables.net/plug-ins/1.10.13/sorting/alt-string.js'
+  );
 
   // Enqueue them all
   wp_enqueue_style( 'egdform' );

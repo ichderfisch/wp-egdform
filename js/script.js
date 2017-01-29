@@ -68,10 +68,13 @@ jQuery(document).ready( function($) {
 
 jQuery(document).ready(function($) {
     $('#participants-list-1 > table').DataTable( {
-      "autoWidth": false,
+      "aaSorting": [],
       "columnDefs": [ {
-        "targets": [2, 3, 5, 6],
+        "targets": [2, 5, 6],
         "orderable": false
+      }, { 
+        "type": 'alt-string', 
+        "targets": 3 
       } ],
       "info": false,
       "paging": false,
