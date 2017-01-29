@@ -30,15 +30,27 @@ function register_egdform_css_js() {
     plugins_url( 'wp-egdform/js/table.js' ),
     array( 'jquery' )
   );
+  
+  // Datatables
+  wp_register_style(
+    'datatables',
+    'https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css'
+  );
+  wp_register_script(
+    'datatables',
+    'https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js'
+  );
+  
   // Enqueue them all
   wp_enqueue_style( 'egdform' );
   wp_enqueue_script( 'egdform' );
   wp_enqueue_script( 'egdtable' );
+  
+  wp_enqueue_style( 'datatables' );
+  wp_enqueue_script( 'datatables' );
 }
 
 add_action( 'wp_enqueue_scripts', 'register_egdform_css_js' );
-
-
 
 // Add Shortcode
 function show_egdform_results( $atts ) {

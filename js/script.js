@@ -42,3 +42,16 @@ jQuery(document).ready( function($) {
     egdSearchBtn.click(search);
   }
 });
+
+jQuery(document).ready(function($) {
+    $('#participants-list-1 > table').DataTable( {
+      "autoWidth": false,
+      "columnDefs": [ {
+        "targets": [2, 3, 5, 6],
+        "orderable": false
+      } ],
+      "info": false,
+      "paging": false,
+      "searching": false
+    });
+});
