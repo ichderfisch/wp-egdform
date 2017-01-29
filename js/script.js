@@ -69,6 +69,7 @@ jQuery(document).ready( function($) {
 jQuery(document).ready(function($) {
     $('#participants-list-1 > table').DataTable( {
       "aaSorting": [],
+      "autoWidth": false,
       "columnDefs": [ {
         "targets": [2, 5, 6],
         "orderable": false
