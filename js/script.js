@@ -20,6 +20,12 @@ jQuery(document).ready( function($) {
       setField('#pdb-grade', player.Grade);
       setField('#pdb-email', '');
       setField('#pdb-age_group', '');
+      var playedEgcBefore = $('[name="played_egc_before"][type="checkbox"]');
+      if (playedEgcBefore.length) {
+        var e = $(playedEgcBefore[0]);
+        e.attr('checked', true);
+        $(e.closest('tr')[0]).hide();
+      }
     }
   }
   if (y) {
@@ -49,7 +55,7 @@ jQuery(document).ready( function($) {
       spinner.show();
       $.getJSON(
         url,
-        { name: egdFName.value, lastname: egdLName.value },
+        { name: egdFName.value.trim(), lastname: egdLName.value.trim() },
         showList
       );
     };
@@ -57,7 +63,7 @@ jQuery(document).ready( function($) {
       spinner.show();
       $.getJSON(
         idUrl,
-        { pin: egdID.value },
+        { pin: egdID.value.trim() },
         function(result) { showList({ players: [result] }); }
       );
     };
