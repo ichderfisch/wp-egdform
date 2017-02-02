@@ -3,8 +3,8 @@
   Plugin Name: EGD Form
   Plugin URI: https://github.com/ichderfisch/wp-egdform
   Description: Plugin that adds a shortcode which outputs a player search within the European Go Database (EGD)
-  Version: 0.0.1
-  Author: Daniel Maslowski, Dennis Fischer
+  Version: 0.0.2
+  Author: Daniel Maslowski, Dennis Fischer, Denis Weber
   Author URI: http://www.ichderfisch.de
 */
 
@@ -30,6 +30,10 @@ function register_egdform_css_js() {
     plugins_url( 'wp-egdform/js/table.js' ),
     array( 'jquery' )
   );
+  wp_register_script(
+    'egccalc',
+    plugins_url( 'wp-egdform/js/priceCalc.js' )
+  );
 
   // Datatables
   wp_register_style(
@@ -38,17 +42,20 @@ function register_egdform_css_js() {
   );
   wp_register_script(
     'datatables',
-    'https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js'
+    'https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js',
+    array( 'jquery' )
   );
   wp_register_script(
     'datatablesAltstring',
-    'https://cdn.datatables.net/plug-ins/1.10.13/sorting/alt-string.js'
+    'https://cdn.datatables.net/plug-ins/1.10.13/sorting/alt-string.js',
+    array( 'jquery' )
   );
 
   // Enqueue them all
   wp_enqueue_style( 'egdform' );
   wp_enqueue_script( 'egdform' );
   wp_enqueue_script( 'egdtable' );
+  wp_enqueue_script( 'egccalc' );
 
   wp_enqueue_style( 'datatables' );
   wp_enqueue_script( 'datatables' );
