@@ -33,7 +33,7 @@ function getPrice() {
 // will return the price according to http://www.egc2017.eu/registration/ , considering the age and the registration date
 
 function getPriceByCurrentDate() {
-    var currentDate = new Date().getMilliseconds();
+    var currentDate = +new Date();
 
     var earlyBirdDate = 1487113200000; //15.02.17
     var standardDate = 1492207200000; // 15.04.17
